@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
-public class PlayerControl2
-    : MonoBehaviour
+public class PlayerControlMoveMent : MonoBehaviour
 {
-
     private CharacterController character;
     private Vector2 movement;
     public float movementSpeed = 5f;

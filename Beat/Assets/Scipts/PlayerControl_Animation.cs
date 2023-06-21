@@ -155,7 +155,7 @@ public class PlayerControl_Animation : MonoBehaviour
         animator.SetTrigger("Attack");
 
         float damageAmount = 10f;
-        healthBar.TakeDamage(damageAmount);
+        //healthBar.TakeDamage(damageAmount);
 
     }
     private void MainMenu()
