@@ -7,17 +7,16 @@ public class EnemyControler : MonoBehaviour
 {
     public Transform playerPosition; // Reference to the player's position
     public NavMeshAgent enemy; // Reference to the NavMeshAgent component
-    public Animator anim;
-
+   Animator anim;
+    public float attackRange = 2f; // The range within which the enemy can attack the player
+    public int attackDamage = 1;
     private bool isIdle = true;
     private bool foundPlayer = false;
-
     private void Awake()
     {
         enemy = GetComponent<NavMeshAgent>(); // Assign the NavMeshAgent component
         anim = GetComponent<Animator>();
     }
-
     private void Update()
     {
         if (playerPosition != null)
@@ -43,12 +42,15 @@ public class EnemyControler : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (other.CompareTag("Player"))
+        if (hit.collider.CompareTag("Player"))
         {
-            foundPlayer = true;
-            isIdle = false;
+            PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(attackDamage);
+            }
         }
     }
 
@@ -63,6 +65,17 @@ public class EnemyControler : MonoBehaviour
 
     private void Attack()
     {
+        if (Vector3.Distance(transform.position, playerPosition.position) <= attackRange)
+        {
+            // Deal damage to the player
+            PlayerHealth playerHealth = playerPosition.GetComponent<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(attackDamage);
+            }
+        }
+
+        // Trigger the attack animation
         anim.SetTrigger("Attack");
     }
 
