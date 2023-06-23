@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class HealthBarw : MonoBehaviour
 {
     public Slider slider;
-    public PlayerControl_Animation player;
+    public PlayerControlMoveMent player;
 
     private void Start()
     {
         // Get reference to the PlayerControl_Animation component
-        player = FindObjectOfType<PlayerControl_Animation>();
+        player = FindObjectOfType<PlayerControlMoveMent>();
 
         // Set the maximum value of the slider to match the player's max health
         slider.maxValue = player.maxHealth;
