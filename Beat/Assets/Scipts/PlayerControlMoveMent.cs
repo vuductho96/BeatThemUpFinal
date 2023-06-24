@@ -15,27 +15,25 @@ public class PlayerControlMoveMent : MonoBehaviour
     private bool isJumping;
     public float maxHealth;
     public float currentHealth;
-
-
     // Maximum health value for the player
-
-
     Animator animator;
     AudioSource audioSource;
     bool isMoving; // Flag to track if the player is moving
 
     private void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
         character = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+       
     }
 
     public void OnMovement(InputAction.CallbackContext context)
     {
         movement = context.ReadValue<Vector2>();
     }
+
 
     private void Update()
     {
